@@ -1,4 +1,4 @@
-#!/usr/bin/env octave
+#!/usr/bin/env octave -q
 ##Darcy-Weisbach Curve
 LineTag="FiFi200"
 PipeIDmm=200          ##Units: mm
