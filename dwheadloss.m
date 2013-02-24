@@ -1,14 +1,20 @@
 #!/usr/bin/env octave -q
 ##Darcy-Weisbach Curve
+
+# NOTE: Values had been initiated with working example.
+#		Update those with your values!
+
+# INPUT BLOCK
+
 LineTag="FiFi200"
-PipeIDmm=200          ##Units: mm
-Roughness_mm=0.04572  #Units:mm
-Viscosity_cSt=1.3     #Units:cSt
-Flow_cumph=400        #Units:cum/h
-OtherIDmm=250         #ID of reducer/enlarger in mm
+PipeIDmm=200          ##Units: mm - must be greater than '0'
+Roughness_mm=0.04572  #Units:mm - must be greater than '0'
+Viscosity_cSt=1.3     #Units:cSt - must be greater than '0'
+Flow_cumph=400        #Units:cum/h - must be greater than '0'
+OtherIDmm=250         #ID of reducer/enlarger in mm - must be greater than '0'
 ##-------------------------------------------------
 ## Head Losses
-pipeLen_m=80         #pipelength in meters
+pipeLen_m=80         #pipelength in meters - must be greater than '0'
 statHead_m=26         #Height difference between entrance and exit unit:m
 num_90deg_el=5       #number of 90 deg standard elbows
 numLR_el=0           #number of Long Radius elbows
@@ -31,7 +37,11 @@ numContraction=0     #number of flow contractions
 numEnlarg=0          #number of flow enlrgements
 numStrainer=0       #number of strainers
 User=0                   #user defined - input as total local loss
+# END OF INPUT BLOCK
+# DO NOT CHANGE ANYTHING BELOW THIS LINE,if your intention is just to use script
 #--------------------------------------------------
+
+
 IDFact=PipeIDmm/OtherIDmm
 Kcon=(1-(IDFact.**2)).**2;
 Kenl=(1-(1/(IDFact.**2))).**2;
@@ -103,23 +113,13 @@ fclose(fid);
 #**************************
 fid=fopen(fileResults, "a");
 fprintf(fid, "\nPipe ID [mm]=%f \tReduced/enlarged ID[mm]=%f \tRoughness [mm]=%f \tViscosity [cSt]=%f \tHeigh difference between entrance and exit [m]=%f",  PipeIDmm, OtherIDmm,Roughness_mm, Viscosity_cSt, statHead_m );
-fclose(fid);
-fid=fopen(fileResults, "a");
+
 fprintf(fid, "\nNumber of Std 90deg Elbows =%f \nNumber of LR Elbows =%f \nNumber of SR Elbows  =%f \nNumber of Return Bends =%f \nNumber of Std 45deg Elbows =%f", num_90deg_el,numLR_el,numSR_el, numRetBnd, num_45deg_el);
-fclose(fid);
-fid=fopen(fileResults, "a");
 fprintf(fid,"\nNumber of Butterfly Valves=%f \nNumber of Gate Valves=%f \nNumber of Angle Valves=%f \nNumber of Globe Valves=%f \nNumber of Duo Check Valves=%f, \nNumber of Swing Check Valves=%f \nNumber of Std Footvalves=%f \nNumber of Footvalves Poppet Type=%f", numBtfVlv, numGtVlv,numAngVlv, numGlVlv, numDuoChkVlv, numSwgChkVlv, numFootStdVlv, numFootPopVlv);
-fclose(fid); 
-fid=fopen(fileResults, "a");
 fprintf(fid, "\nNumber of Tees - flow through=%f \nNumber of Tees - change Flow direction=%f \nPipe exits=%f \nPipe entrances=%f, \nPipe Contractions=%f \nPipe Enlargements=%f \nStrainers=%f \nUser Defined Losses=%f", numTFlowHead, numTFlowBran, numPipExit, numPipEntr, numContraction, numEnlarg, numStrainer, User);
-fclose(fid);
+
 #results printing
-fid=fopen(fileResults, "a");
 fprintf(fid, "\n \n******* \nCalculation Results \n \nTotal Local Losses=%f", Klocal);
-fclose(fid);
-fid=fopen(fileResults, "a");
- fprintf(fid, "\nReynolds: %f;%f \nVelocity: %f;%f,%f \nHeadloss: %f;%f;%f", p1(1),p1(2),p2(1),p2(2),p2(3),p3(1),p3(2),p3(3));
- fclose(fid);
- fid=fopen(fileResults, "a")
- fprintf(fid, "\nReynolds=%f *Q + %f \nVelocity= %f *Q**2 +%f *Q+ %f \nHeadloss= %f *Q**2+ %f *Q +%f", p1(1), p1(2),p2(1),p2(2),p2(3), p3(1),p3(2),p3(3));
- fclose(fid)
+fprintf(fid, "\nReynolds: %f;%f \nVelocity: %f;%f,%f \nHeadloss: %f;%f;%f", p1(1),p1(2),p2(1),p2(2),p2(3),p3(1),p3(2),p3(3));
+fprintf(fid, "\nReynolds=%f *Q + %f \nVelocity= %f *Q**2 +%f *Q+ %f \nHeadloss= %f *Q**2+ %f *Q +%f", p1(1), p1(2),p2(1),p2(2),p2(3), p3(1),p3(2),p3(3));
+fclose(fid)
