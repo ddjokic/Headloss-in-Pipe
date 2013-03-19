@@ -28,6 +28,10 @@ except Contraction and Enlargement, which must be calculated by main script. See
 Files ods and xls are the same - use one or the other, depending on your spreadsheet program.</p>
 </p>
 
+<u>Edit Mar-2013</u>: as all three of you do not feel confortable to input data in main script, from editor, folder zXLS had
+been added, with template file(s) in xls and ods format and octave script dwflocsv.m, capable to read data in comma separated 
+format. Read sort of manual in worksheet "Note" and edit your data in worksheet "input". </p>
+
 Script comes with **ABSOLUTELY NO WARRANTY**.</p>
 
-Copyrigt © by D. Djokic, 2012
+Copyright © 2012 - 2013 D. Djokic
