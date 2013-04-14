@@ -67,7 +67,7 @@ for Flow=0.001:Flow_cumph
  velocity_mps=(4*Flow/3600)/(3.14*(PipeIDmm/1000).**2); #units m/s;
  reynolds=velocity_mps*(PipeIDmm/1000)/(Viscosity_cSt/1000000);
  #Head loss as funct. of flow 
- HeadLoss=(fcoef*(pipeLen_m*1000/PipeIDmm)+Klocal)*velocity_mps.**2/(2*9.81)+statHead_m;
+ HeadLoss=((fcoef*(pipeLen_m*1000/PipeIDmm)+Klocal)*(4*Flow/(3.14*PipeIDmm.**2)).**2)/(2*9.81)+statHead_m;
  p1=polyfit(Flow,reynolds,1);
  Re=polyval(p1,Flow);
  p2=polyfit(Flow, velocity_mps, 2);
